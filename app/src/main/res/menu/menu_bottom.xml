@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="@string/menu_item_1"
+        android:id="@+id/poiHomeFragment"
+        android:icon="@drawable/ic_placeholder"/>
+    <item
+        android:id="@+id/poiListFragment"
+        android:title="@string/menu_item_2"
+        android:icon="@drawable/ic_directions_svgrepo_com"/>
+    <item
+        android:id="@+id/showPoiFragments"
+        android:title="@string/menu_item_3"
+        android:icon="@drawable/ic_destination"/>
+
+</menu>

@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">gepAppDemo</string>
+    <string name="app_name">geoAppDemo</string>
+
+    <!-- bottom menu -->
+    <string name="menu_item_1">Create</string>
+    <string name="menu_item_2">Saved Poi</string>
+    <string name="menu_item_3">Show Poi</string>
+
+    <!-- Fragment Label -->
+    <string name="fragmentCreatePoi">Create Point of Interest</string>
+    <string name="fragmentListOfPoi">Point of Interest List</string>
+    <string name="fragmentsShowAllPoi">Show All saved poi</string>
 </resources>
