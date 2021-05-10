@@ -99,13 +99,13 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/cancelAlert"
-            android:paddingLeft="5dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -114,7 +114,7 @@
 
         <Button
             android:id="@+id/submitPoi"
-            android:paddingLeft="5dp"
+            android:layout_marginLeft="5dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
