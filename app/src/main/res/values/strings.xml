@@ -10,4 +10,15 @@
     <string name="fragmentCreatePoi">Create Point of Interest</string>
     <string name="fragmentListOfPoi">Point of Interest List</string>
     <string name="fragmentsShowAllPoi">Show All saved poi</string>
+
+    <!-- Alert Label -->
+    <string name="alertTitle">Create Poi!</string>
+    <string name="alertCoord">Latitude/Longitude</string>
+    <string name="alertText">Insert Name</string>
+    <string name="alertImage">Insert Image</string>
+    <string name="alertgallery">Gallery</string>
+    <string name="alertCamera">TakePhoto</string>
+    <string name="alertSave">Save Poi</string>
+    <string name="alertCancel">Cancel Poi</string>
+
 </resources>
