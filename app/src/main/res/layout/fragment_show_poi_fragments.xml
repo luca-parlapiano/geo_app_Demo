@@ -7,18 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ShowPoiFragments">
 
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="174dp"
-        android:layout_marginTop="326dp"
-        android:layout_marginEnd="171dp"
-        android:layout_marginBottom="386dp"
-        android:text="SHOW POI"
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapViewResult"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
