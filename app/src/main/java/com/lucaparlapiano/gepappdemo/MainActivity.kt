@@ -1,7 +1,13 @@
 package com.lucaparlapiano.gepappdemo
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -9,7 +15,6 @@ import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    //private lateinit var pViewModel: poiViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -20,7 +25,6 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         //Setting fragments label in topbar
         val appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -36,5 +40,54 @@ class MainActivity : AppCompatActivity() {
 
         //Appy Label  on topbar
         setupActionBarWithNavController(navController,appBarConfiguration)
+    }
+
+    //Permission Section
+     fun checkForPermission(permission:String,name:String,requestCode:Int){
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
+            when {
+                ContextCompat.checkSelfPermission(applicationContext,permission) == PackageManager.PERMISSION_GRANTED -> {
+                    Toast.makeText(applicationContext,"$name "+getString(R.string.permission_ok),Toast.LENGTH_SHORT).show()
+                }
+                shouldShowRequestPermissionRationale(permission) -> showDialog(permission,name,requestCode)
+
+                else -> ActivityCompat.requestPermissions(this, arrayOf(permission),requestCode)
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        fun innerCheck(name: String) {
+            if(grantResults.isEmpty() || grantResults[0] !=  PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(applicationContext,"$name "+getString(R.string.permission_no),Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(applicationContext,"$name "+getString(R.string.permission_ok), Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        when(requestCode){
+            Constants.FINE_LOCATION -> innerCheck("location")
+            Constants.CAMERA ->innerCheck("camera")
+            Constants.EXTERNAL_READ -> innerCheck("external_read")
+        }
+    }
+
+
+    private fun showDialog(permission: String,name: String,requestCode: Int){
+        val builder = AlertDialog.Builder(this)
+
+        builder.apply {
+            setMessage(getString(R.string.permissione_question_1)+" $name "+getString(R.string.permissione_question_2))
+            setTitle(getString(R.string.permission_required))
+            setPositiveButton(getString(R.string.permission_ok_button)){ dialog,  which ->
+                ActivityCompat.requestPermissions(this@MainActivity, arrayOf(permission),requestCode)
+            }
+        }
+        val dialog:AlertDialog = builder.create()
+        dialog.show()
     }
 }

@@ -21,4 +21,11 @@
     <string name="alertSave">Save Poi</string>
     <string name="alertCancel">Cancel Poi</string>
 
+    <!-- Alert permission -->
+    <string name="permission_ok">permission granted</string>
+    <string name="permission_no">permission refused</string>
+    <string name="permission_required">Permission required</string>
+    <string name="permissione_question_1">Permission to access your</string>
+    <string name="permissione_question_2">is required to use this app</string>
+    <string name="permission_ok_button">OK</string>
 </resources>

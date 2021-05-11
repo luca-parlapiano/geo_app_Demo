@@ -1,7 +1,6 @@
 package com.lucaparlapiano.gepappdemo.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,25 +36,28 @@ class ShowPoiFragments : Fragment(), OnMapReadyCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       return inflater.inflate(R.layout.fragment_show_poi_fragments, container, false)
+        return inflater.inflate(R.layout.fragment_show_poi_fragments, container, false)
     }
 
     override fun onMapReady(map: GoogleMap?) {
         map?.let {
             googleMap = it
             //Config Default location
-            val sydney = LatLng(-34.0, 151.0)
-            val italy = LatLng(41.61,13.16)
+            val italy = LatLng(41.61, 13.16)
             googleMap.addMarker(MarkerOptions().position(italy).title("Default marker"))
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(italy))
 
             ViewModel.allPoiPoint.observe(viewLifecycleOwner, Observer { poiPoint ->
                 //  Log.d("ListPoint",poiPoint.toString())
-                poiPoint?.let{
+                poiPoint?.let {
                     for (i in 0 until it.size) {
-                        Log.d("Latitude",it[i].latitude)
-                        Log.d("Longitude",it[i].longitude)
-                        createMarker(it[i].latitude.toDouble(),it[i].longitude.toDouble(),it[i].name)
+                        /*  Log.d("Latitude",it[i].latitude)
+                          Log.d("Longitude",it[i].longitude)*/
+                        createMarker(
+                            it[i].latitude.toDouble(),
+                            it[i].longitude.toDouble(),
+                            it[i].name
+                        )
                     }
                 }
             })
