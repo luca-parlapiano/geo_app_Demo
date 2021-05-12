@@ -1,22 +1,28 @@
 package com.lucaparlapiano.geoappdemo
 
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.lucaparlapiano.geoappdemo.Constants.CAMERA
 import com.lucaparlapiano.geoappdemo.Constants.FINE_LOCATION
+import com.lucaparlapiano.geoappdemo.model.LocationDetail
+import com.lucaparlapiano.geoappdemo.viewModel.LocationViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var navController:NavController
+    private lateinit var locationViewModel: LocationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -31,31 +37,29 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.poiHomeFragment,
-               // R.id.poiListFragment,
+               // R.id.poiListFragment, //-> it's because i must delete one step from navigation
                 R.id.showPoiFragments
             ))
+        locationViewModel = ViewModelProvider(this).get(LocationViewModel::class.java)
 
         //Setting navigator in the bottombar
-        var navController = findNavController(R.id.fragmentContainerView)
+        navController = findNavController(R.id.fragmentContainerView)
         bottomNavigationView.setupWithNavController(navController)
         bottomNavigationView.itemIconTintList = null
-        //checkForPermission(android.Manifest.permission.CAMERA,"camera",CAMERA)
-        checkForPermission(android.Manifest.permission.ACCESS_FINE_LOCATION,"location",FINE_LOCATION)
-        //Appy Label  on topbar
+
+        requestlocationUpgrade()
+
+        //Appy Help Label  on topbar
         setupActionBarWithNavController(navController,appBarConfiguration)
     }
 
-    //Permission Section
-     fun checkForPermission(permission:String,name:String,requestCode:Int){
-        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
-            when {
-                ContextCompat.checkSelfPermission(applicationContext,permission) == PackageManager.PERMISSION_GRANTED -> {
-                    Toast.makeText(applicationContext,"$name "+getString(R.string.permission_ok),Toast.LENGTH_SHORT).show()
-                }
-                shouldShowRequestPermissionRationale(permission) -> showDialog(permission,name,requestCode)
 
-                else -> ActivityCompat.requestPermissions(this, arrayOf(permission),requestCode)
-            }
+    private fun requestlocationUpgrade() {
+        if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+            startTraker()
+        }else{
+            val permissionRequest = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.CAMERA)
+            requestPermissions(permissionRequest,FINE_LOCATION)
         }
     }
 
@@ -64,33 +68,29 @@ class MainActivity : AppCompatActivity() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        fun innerCheck(name: String) {
-            if(grantResults.isEmpty() || grantResults[0] !=  PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(applicationContext,"$name "+getString(R.string.permission_no),Toast.LENGTH_SHORT).show()
-            }else{
-                Toast.makeText(applicationContext,"$name "+getString(R.string.permission_ok), Toast.LENGTH_SHORT).show()
-            }
-        }
-
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when(requestCode){
-            Constants.FINE_LOCATION -> innerCheck("location")
-            Constants.CAMERA ->innerCheck("camera")
-            Constants.EXTERNAL_READ -> innerCheck("external_read")
+            Constants.FINE_LOCATION ->{
+                if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    startTraker()
+                }else{
+                    Toast.makeText(this,"No GPS permission",Toast.LENGTH_LONG).show()
+                }
+            }
+            Constants.CAMERA ->{
+                if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                }else{
+                    Toast.makeText(this,"Check Camera permission",Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
 
+    private fun startTraker() {
+        locationViewModel.getLocationLiveData().observe(this, Observer {
+            Log.d("Position Track User",it.latitude+" - "+it.longitude)
+            locationViewModel.setActualPosition(LocationDetail(it.latitude,it.longitude))
+        })
 
-    private fun showDialog(permission: String,name: String,requestCode: Int){
-        val builder = AlertDialog.Builder(this)
-
-        builder.apply {
-            setMessage(getString(R.string.permissione_question_1)+" $name "+getString(R.string.permissione_question_2))
-            setTitle(getString(R.string.permission_required))
-            setPositiveButton(getString(R.string.permission_ok_button)){ dialog,  which ->
-                ActivityCompat.requestPermissions(this@MainActivity, arrayOf(permission),requestCode)
-            }
-        }
-        val dialog:AlertDialog = builder.create()
-        dialog.show()
     }
 }

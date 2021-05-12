@@ -48,12 +48,9 @@ class ShowPoiFragments : Fragment(), OnMapReadyCallback {
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(italy))
 
             ViewModel.allPoiPoint.observe(viewLifecycleOwner, Observer { poiPoint ->
-                //  Log.d("ListPoint",poiPoint.toString())
                 poiPoint?.let {
                     for (i in 0 until it.size) {
-                        /*  Log.d("Latitude",it[i].latitude)
-                          Log.d("Longitude",it[i].longitude)*/
-                           Log.d("image",it[i].imagUrl)
+                        Log.d("image", it[i].imagUrl)
                         createMarker(
                             it[i].latitude.toDouble(),
                             it[i].longitude.toDouble(),
@@ -70,37 +67,15 @@ class ShowPoiFragments : Fragment(), OnMapReadyCallback {
         latitude: Double,
         longitude: Double,
         title: String?,
-        iconResID:String
+        iconResID: String
     ): Marker? {
         return googleMap.addMarker(
             MarkerOptions()
                 .position(LatLng(latitude, longitude))
                 .anchor(0.5f, 0.5f)
                 .title(title)
-                //.icon(BitmapDescriptorFactory.fromFile(iconResID))
+            //.icon(BitmapDescriptorFactory.fromFile(iconResID))
         )
     }
-
-    /*
-    * ArrayList<MarkerData> markersArray = new ArrayList<MarkerData>();
-
-for(int i = 0 ; i < markersArray.size() ; i++) {
-
-    createMarker(markersArray.get(i).getLatitude(), markersArray.get(i).getLongitude(), markersArray.get(i).getTitle(), markersArray.get(i).getSnippet(), markersArray.get(i).getIconResID());
-}
-
-
-protected Marker createMarker(double latitude, double longitude, String title, String snippet, int iconResID) {
-
-    return googleMap.addMarker(new MarkerOptions()
-            .position(new LatLng(latitude, longitude))
-            .anchor(0.5f, 0.5f)
-            .title(title)
-            .snippet(snippet)
-            .icon(BitmapDescriptorFactory.fromResource(iconResID)));
-}
-    *
-    * */
-
 
 }
