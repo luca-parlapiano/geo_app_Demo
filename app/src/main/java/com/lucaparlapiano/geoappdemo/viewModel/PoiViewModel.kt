@@ -1,12 +1,12 @@
-package com.lucaparlapiano.gepappdemo.model
+package com.lucaparlapiano.geoappdemo.viewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.lucaparlapiano.gepappdemo.db.AppDatabase
-import com.lucaparlapiano.gepappdemo.db.poiPoint
-import com.lucaparlapiano.gepappdemo.repository.poiRepository
+import com.lucaparlapiano.geoappdemo.db.AppDatabase
+import com.lucaparlapiano.geoappdemo.model.poiPoint
+import com.lucaparlapiano.geoappdemo.repository.poiRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -21,7 +21,7 @@ class poiViewModel(application: Application):AndroidViewModel(application) {
         allPoiPoint = repository.readAllPoi
     }
 
-    fun insert(poiPo:poiPoint) =  viewModelScope.launch(Dispatchers.IO) {
+    fun insert(poiPo: poiPoint) =  viewModelScope.launch(Dispatchers.IO) {
         repository.addPoi(poiPo)
     }
 

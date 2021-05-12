@@ -1,7 +1,8 @@
-package com.lucaparlapiano.gepappdemo.db
+package com.lucaparlapiano.geoappdemo.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.lucaparlapiano.geoappdemo.model.poiPoint
 
 @Dao
 interface poiPointDao {

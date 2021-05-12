@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/poiHomeFragment"
-        android:name="com.lucaparlapiano.gepappdemo.fragments.PoiHomeFragment"
+        android:name="com.lucaparlapiano.geoappdemo.fragments.PoiHomeFragment"
         android:label="@string/fragmentCreatePoi"
         tools:layout="@layout/fragment_poi_home" />
     <fragment
         android:id="@+id/poiListFragment"
-        android:name="com.lucaparlapiano.gepappdemo.fragments.PoiListFragment"
+        android:name="com.lucaparlapiano.geoappdemo.fragments.PoiListFragment"
         android:label="@string/fragmentListOfPoi"
         tools:layout="@layout/fragment_poi_list" />
     <fragment
         android:id="@+id/showPoiFragments"
-        android:name="com.lucaparlapiano.gepappdemo.fragments.ShowPoiFragments"
+        android:name="com.lucaparlapiano.geoappdemo.fragments.ShowPoiFragments"
         android:label="@string/fragmentsShowAllPoi"
         tools:layout="@layout/fragment_show_poi_fragments" />
 </navigation>

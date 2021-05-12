@@ -1,4 +1,4 @@
-package com.lucaparlapiano.gepappdemo
+package com.lucaparlapiano.geoappdemo
 
 import android.content.pm.PackageManager
 import android.os.Build
@@ -12,6 +12,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.lucaparlapiano.geoappdemo.Constants.CAMERA
+import com.lucaparlapiano.geoappdemo.Constants.FINE_LOCATION
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.poiHomeFragment,
-                R.id.poiListFragment,
+               // R.id.poiListFragment,
                 R.id.showPoiFragments
             ))
 
@@ -37,7 +39,8 @@ class MainActivity : AppCompatActivity() {
         var navController = findNavController(R.id.fragmentContainerView)
         bottomNavigationView.setupWithNavController(navController)
         bottomNavigationView.itemIconTintList = null
-
+        //checkForPermission(android.Manifest.permission.CAMERA,"camera",CAMERA)
+        checkForPermission(android.Manifest.permission.ACCESS_FINE_LOCATION,"location",FINE_LOCATION)
         //Appy Label  on topbar
         setupActionBarWithNavController(navController,appBarConfiguration)
     }

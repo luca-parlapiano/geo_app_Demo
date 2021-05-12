@@ -1,6 +1,6 @@
-package com.lucaparlapiano.gepappdemo.db
+package com.lucaparlapiano.geoappdemo.model
 
-import androidx.room.ColumnInfo
+import android.net.Uri
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -9,7 +9,7 @@ data class poiPoint(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
     val name: String,
-    val imagUrl:String,
+    val imagUrl: String,
     val longitude:String,
     val latitude:String
     )

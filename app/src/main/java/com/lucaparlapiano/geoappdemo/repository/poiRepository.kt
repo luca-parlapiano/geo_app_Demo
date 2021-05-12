@@ -1,9 +1,9 @@
-package com.lucaparlapiano.gepappdemo.repository
+package com.lucaparlapiano.geoappdemo.repository
 
 import androidx.lifecycle.LiveData
 
-import com.lucaparlapiano.gepappdemo.db.poiPoint
-import com.lucaparlapiano.gepappdemo.db.poiPointDao
+import com.lucaparlapiano.geoappdemo.model.poiPoint
+import com.lucaparlapiano.geoappdemo.db.poiPointDao
 
 class poiRepository(private val pointPoi: poiPointDao) {
 
@@ -12,4 +12,6 @@ class poiRepository(private val pointPoi: poiPointDao) {
     suspend fun addPoi(poiPoint: poiPoint){
         pointPoi.insertPoi(poiPoint)
     }
+
+
 }

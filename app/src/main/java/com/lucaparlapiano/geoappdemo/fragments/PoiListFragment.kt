@@ -1,4 +1,4 @@
-package com.lucaparlapiano.gepappdemo.fragments
+package com.lucaparlapiano.geoappdemo.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -8,13 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import com.lucaparlapiano.gepappdemo.R
-import com.lucaparlapiano.gepappdemo.model.poiViewModel
+import com.lucaparlapiano.geoappdemo.R
+import com.lucaparlapiano.geoappdemo.viewModel.poiViewModel
 
 
 class PoiListFragment : Fragment() {
 
     private val ViewModel: poiViewModel by activityViewModels()
+    /*
+    * WARNING
+    * this fragment is't used
+    * */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

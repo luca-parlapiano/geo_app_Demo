@@ -1,4 +1,4 @@
-package com.lucaparlapiano.gepappdemo
+package com.lucaparlapiano.geoappdemo
 
 import org.junit.Test
 

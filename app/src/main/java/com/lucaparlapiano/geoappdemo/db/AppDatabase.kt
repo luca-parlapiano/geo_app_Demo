@@ -1,9 +1,10 @@
-package com.lucaparlapiano.gepappdemo.db
+package com.lucaparlapiano.geoappdemo.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.lucaparlapiano.geoappdemo.model.poiPoint
 import kotlinx.coroutines.CoroutineScope
 
 @Database(entities = [poiPoint::class], version = 1)

@@ -1,6 +1,7 @@
-package com.lucaparlapiano.gepappdemo.fragments
+package com.lucaparlapiano.geoappdemo.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +14,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.lucaparlapiano.gepappdemo.R
-import com.lucaparlapiano.gepappdemo.model.poiViewModel
+import com.lucaparlapiano.geoappdemo.R
+import com.lucaparlapiano.geoappdemo.viewModel.poiViewModel
 import kotlinx.android.synthetic.main.fragment_show_poi_fragments.*
 
 
@@ -44,7 +45,6 @@ class ShowPoiFragments : Fragment(), OnMapReadyCallback {
             googleMap = it
             //Config Default location
             val italy = LatLng(41.61, 13.16)
-            googleMap.addMarker(MarkerOptions().position(italy).title("Default marker"))
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(italy))
 
             ViewModel.allPoiPoint.observe(viewLifecycleOwner, Observer { poiPoint ->
@@ -53,10 +53,12 @@ class ShowPoiFragments : Fragment(), OnMapReadyCallback {
                     for (i in 0 until it.size) {
                         /*  Log.d("Latitude",it[i].latitude)
                           Log.d("Longitude",it[i].longitude)*/
+                           Log.d("image",it[i].imagUrl)
                         createMarker(
                             it[i].latitude.toDouble(),
                             it[i].longitude.toDouble(),
-                            it[i].name
+                            it[i].name,
+                            it[i].imagUrl
                         )
                     }
                 }
@@ -68,12 +70,14 @@ class ShowPoiFragments : Fragment(), OnMapReadyCallback {
         latitude: Double,
         longitude: Double,
         title: String?,
+        iconResID:String
     ): Marker? {
         return googleMap.addMarker(
             MarkerOptions()
                 .position(LatLng(latitude, longitude))
                 .anchor(0.5f, 0.5f)
                 .title(title)
+                //.icon(BitmapDescriptorFactory.fromFile(iconResID))
         )
     }
 
