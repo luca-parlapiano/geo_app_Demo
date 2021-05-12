@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
@@ -74,7 +75,7 @@ class ShowPoiFragments : Fragment(), OnMapReadyCallback {
                 .position(LatLng(latitude, longitude))
                 .anchor(0.5f, 0.5f)
                 .title(title)
-            //.icon(BitmapDescriptorFactory.fromFile(iconResID))
+                 //.icon(BitmapDescriptorFactory.fromPath("content://com.android.providers.media.documents/document/image%3A23120"))
         )
     }
 

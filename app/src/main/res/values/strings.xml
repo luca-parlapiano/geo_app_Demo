@@ -24,4 +24,5 @@
     <!-- POI map -->
     <string name="YourPosition">Your Position</string>
     <string name="noGPS">No GPS Default Position</string>
+    <string name="poiInserited">POI inserited</string>
 </resources>

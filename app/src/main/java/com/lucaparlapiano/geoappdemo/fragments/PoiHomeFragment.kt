@@ -40,27 +40,35 @@ class PoiHomeFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(map: GoogleMap?) {
         map?.let {
             googleMap = it
-
+            googleMap.clear()
             locationViewModel.actualPositionLive.observe(requireActivity(), Observer {
                 if (!(it.latitude == it.longitude)) {
                     //Exact User Position
+
                     Log.d("Position Real", it.latitude + " - " + it.longitude)
                     val userPosition = LatLng(it.latitude.toDouble(), it.longitude.toDouble())
-                    googleMap.clear()
+
                     googleMap.addMarker(
                         MarkerOptions().position(userPosition)
-                            .title(getString(R.string.YourPosition))
+                            .title("Your Position")
                     )
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(userPosition))
+                    val yourLocation = CameraUpdateFactory.newLatLng(userPosition)
+
+                     googleMap.moveCamera(yourLocation)
+                    // Animation is Fun!
+                    //val yourLocation = CameraUpdateFactory.newLatLngZoom(userPosition, 10f)
+                   // googleMap.animateCamera(yourLocation)
                 } else {
+                   /* googleMap.clear()
                     //Config Default location
                     Log.d("Position Default", it.latitude + " - " + it.longitude)
                     val italy = LatLng(41.61, 13.16)
                     googleMap.addMarker(
                         MarkerOptions().position(italy).title(getString(R.string.noGPS))
                     )
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(italy))
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(italy))*/
                 }
+
             })
 
         }
@@ -68,7 +76,8 @@ class PoiHomeFragment : Fragment(), OnMapReadyCallback {
         map?.setOnMapClickListener {
             googleMap.clear()
             googleMap.addMarker(MarkerOptions().position(it).title("Marker"))
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(it))
+            googleMap.clear()
+            //googleMap.moveCamera(CameraUpdateFactory.newLatLng(it))
             showDialog(it)
         }
     }
@@ -78,5 +87,9 @@ class PoiHomeFragment : Fragment(), OnMapReadyCallback {
             .show(childFragmentManager, "Tag")
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        locationViewModel.actualPositionLive.removeObservers(this)
+    }
 
 }
