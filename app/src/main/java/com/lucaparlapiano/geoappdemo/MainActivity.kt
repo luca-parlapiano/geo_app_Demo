@@ -14,7 +14,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.lucaparlapiano.geoappdemo.Constants.FINE_LOCATION
+import com.lucaparlapiano.geoappdemo.Constants.Companion.FINE_LOCATION
 import com.lucaparlapiano.geoappdemo.model.LocationDetail
 import com.lucaparlapiano.geoappdemo.viewModel.LocationViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -70,14 +70,14 @@ class MainActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when(requestCode){
-            Constants.FINE_LOCATION ->{
+            Constants.Companion.FINE_LOCATION ->{
                 if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                     startTraker()
                 }else{
                     Toast.makeText(this,"No GPS permission",Toast.LENGTH_LONG).show()
                 }
             }
-            Constants.CAMERA ->{
+            Constants.Companion.CAMERA ->{
                 if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 }else{
                     Toast.makeText(this,"Check Camera permission",Toast.LENGTH_LONG).show()

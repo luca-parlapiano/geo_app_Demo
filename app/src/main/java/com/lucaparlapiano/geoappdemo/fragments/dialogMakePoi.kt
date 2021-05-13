@@ -14,8 +14,8 @@ import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import com.lucaparlapiano.geoappdemo.Constants.SELECT_PICTURE
-import com.lucaparlapiano.geoappdemo.Constants.TAKE_PICTURE
+import com.lucaparlapiano.geoappdemo.Constants.Companion.SELECT_PICTURE
+import com.lucaparlapiano.geoappdemo.Constants.Companion.TAKE_PICTURE
 import com.lucaparlapiano.geoappdemo.R
 import com.lucaparlapiano.geoappdemo.model.poiPoint
 import com.lucaparlapiano.geoappdemo.viewModel.poiViewModel
