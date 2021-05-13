@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">geoAppDemo</string>
+    <string name="menu_item_1">Crea</string>
+    <string name="menu_item_2">Salva Poi</string>
+    <string name="menu_item_3">Mostra Poi</string>
+    <string name="fragmentCreatePoi">Crea punto di interesse</string>
+    <string name="fragmentListOfPoi">Lista punti Poi</string>
+    <string name="fragmentsShowAllPoi">Mostra tutti i punti salvati</string>
+    <string name="alertTitle">Crea Poi</string>
+    <string name="alertText">Poi Name</string>
+    <string name="alertImage">Ins Immagine</string>
+    <string name="alertgallery">Galleria</string>
+    <string name="alertCamera">Fotocamera</string>
+    <string name="alertSave">Salva Poi</string>
+    <string name="alertCancel">Annulla</string>
+    <string name="YourPosition">Posizione</string>
+    <string name="noGPS">Nessun GPS</string>
+    <string name="poiInserited">Poi salavato</string>
+</resources>
