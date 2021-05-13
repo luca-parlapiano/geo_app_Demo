@@ -17,6 +17,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.lucaparlapiano.geoappdemo.R
 import com.lucaparlapiano.geoappdemo.viewModel.poiViewModel
+import kotlinx.android.synthetic.main.alert_create_poi.*
 import kotlinx.android.synthetic.main.fragment_show_poi_fragments.*
 
 
@@ -75,7 +76,9 @@ class ShowPoiFragments : Fragment(), OnMapReadyCallback {
                 .position(LatLng(latitude, longitude))
                 .anchor(0.5f, 0.5f)
                 .title(title)
-                 //.icon(BitmapDescriptorFactory.fromPath("content://com.android.providers.media.documents/document/image%3A23120"))
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                //.icon(BitmapDescriptorFactory.fromFile("file:///storage/emulated/0/Android/data/com.lucaparlapiano.gepappdemo/files/Pictures/JPEG_20210513_112543777000832479803306.jpg"))
+
         )
     }
 
