@@ -59,7 +59,8 @@ class PoiHomeFragment : Fragment(), OnMapReadyCallback {
                     //val yourLocation = CameraUpdateFactory.newLatLngZoom(userPosition, 10f)
                    // googleMap.animateCamera(yourLocation)
                 } else {
-                   /* googleMap.clear()
+                    /*
+                   googleMap.clear()
                     //Config Default location
                     Log.d("Position Default", it.latitude + " - " + it.longitude)
                     val italy = LatLng(41.61, 13.16)

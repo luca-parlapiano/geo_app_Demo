@@ -8,24 +8,37 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.lucaparlapiano.geoappdemo.R
+import com.lucaparlapiano.geoappdemo.adapters.RecycledViewAdapter
 import com.lucaparlapiano.geoappdemo.viewModel.poiViewModel
+import kotlinx.android.synthetic.main.fragment_poi_list.*
+import kotlinx.android.synthetic.main.fragment_poi_list.view.*
 
 
 class PoiListFragment : Fragment() {
 
     private val ViewModel: poiViewModel by activityViewModels()
-    /*
-    * WARNING
-    * this fragment is't used
-    * */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        ViewModel.allPoiPoint.observe(this, Observer { poiPoint ->
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        listaPoi.layoutManager = LinearLayoutManager(requireContext())
+
+        ViewModel.allPoiPoint.observe(requireActivity(), Observer { poiPoint ->
             poiPoint?.let{
-                Log.d("ListFragment",it.toString())
+                //Log.d("ListFragment",it.toString())
+                var listaPoint = it
+                listaPoi?.let{
+                    listaPoi.adapter = RecycledViewAdapter(listaPoint)
+                }
+
             }
         })
     }
@@ -35,6 +48,7 @@ class PoiListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var view = inflater.inflate(R.layout.fragment_poi_list, container, false)
+
         return view
     }
 

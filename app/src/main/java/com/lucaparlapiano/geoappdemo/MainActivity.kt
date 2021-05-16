@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.poiHomeFragment,
-               // R.id.poiListFragment, //-> it's because i must delete one step from navigation
+                R.id.poiListFragment,
                 R.id.showPoiFragments
             ))
         locationViewModel = ViewModelProvider(this).get(LocationViewModel::class.java)

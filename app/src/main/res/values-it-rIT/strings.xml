@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">geoAppDemo</string>
     <string name="menu_item_1">Crea</string>
-    <string name="menu_item_2">Salva Poi</string>
+    <string name="menu_item_2">Poi salvati</string>
     <string name="menu_item_3">Mostra Poi</string>
     <string name="fragmentCreatePoi">Crea punto di interesse</string>
     <string name="fragmentListOfPoi">Lista punti Poi</string>
@@ -16,5 +16,5 @@
     <string name="alertCancel">Annulla</string>
     <string name="YourPosition">Posizione</string>
     <string name="noGPS">Nessun GPS</string>
-    <string name="poiInserited">Poi salavato</string>
+    <string name="poiInserited">Poi salvato</string>
 </resources>
