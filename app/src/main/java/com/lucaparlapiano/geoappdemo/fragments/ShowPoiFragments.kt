@@ -1,6 +1,9 @@
 package com.lucaparlapiano.geoappdemo.fragments
 
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +21,6 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.lucaparlapiano.geoappdemo.R
 import com.lucaparlapiano.geoappdemo.viewModel.poiViewModel
-import kotlinx.android.synthetic.main.alert_create_poi.*
 import kotlinx.android.synthetic.main.fragment_show_poi_fragments.*
 
 
@@ -58,7 +60,7 @@ class ShowPoiFragments : Fragment(), OnMapReadyCallback {
                             it[i].latitude.toDouble(),
                             it[i].longitude.toDouble(),
                             it[i].name,
-                            it[i].imagUrl
+                            createBitmap(it[i].imagUrl.toUri())
                         )
                     }
                 }
@@ -66,11 +68,20 @@ class ShowPoiFragments : Fragment(), OnMapReadyCallback {
         }
     }
 
+    fun createBitmap(urlBitmap: Uri):Bitmap {
+        var bitmapTemp: Bitmap = MediaStore.Images.Media.getBitmap(
+            requireActivity().contentResolver,
+            urlBitmap
+        )
+
+        return Bitmap.createScaledBitmap(bitmapTemp,150,150,false)
+    }
+
     protected fun createMarker(
         latitude: Double,
         longitude: Double,
         title: String?,
-        iconResID: String
+        markerImage: Bitmap
     ): Marker? {
         return googleMap.addMarker(
 
@@ -78,8 +89,8 @@ class ShowPoiFragments : Fragment(), OnMapReadyCallback {
                 .position(LatLng(latitude, longitude))
                 .anchor(0.5f, 0.5f)
                 .title(title)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-                //.icon(BitmapDescriptorFactory.fromFile("file:///storage/emulated/0/Android/data/com.lucaparlapiano.gepappdemo/files/Pictures/JPEG_20210513_112543777000832479803306.jpg"))
+                .icon(BitmapDescriptorFactory.fromBitmap(markerImage))
+            //.icon(BitmapDescriptorFactory.fromFile("file:///storage/emulated/0/Android/data/com.lucaparlapiano.gepappdemo/files/Pictures/JPEG_20210513_112543777000832479803306.jpg"))
 
         )
     }

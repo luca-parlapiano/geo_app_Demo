@@ -31,7 +31,7 @@ class dialogMakePoi : DialogFragment() {
 
     private val ViewModel: poiViewModel by activityViewModels()
     var currentPath: String? = null
-    var imgPath:Uri? =null
+    var imgPath: Uri? = null
 
     companion object {
         private const val KEY_LONG = "LONG"
@@ -98,7 +98,8 @@ class dialogMakePoi : DialogFragment() {
                 )
             )
             dismiss()
-            Toast.makeText(requireContext(),getString(R.string.poiInserited), Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), getString(R.string.poiInserited), Toast.LENGTH_LONG)
+                .show()
         }
 
     }
@@ -109,9 +110,13 @@ class dialogMakePoi : DialogFragment() {
             var photoFile: File? = null
             photoFile = createFile()
 
-            if(photoFile != null){
-                var photoUrl = FileProvider.getUriForFile(requireActivity(),"com.lucaparlapiano.geoappdemo.fileprovider",photoFile)
-                intent.putExtra(MediaStore.EXTRA_OUTPUT,photoUrl)
+            if (photoFile != null) {
+                var photoUrl = FileProvider.getUriForFile(
+                    requireActivity(),
+                    "com.lucaparlapiano.geoappdemo.fileprovider",
+                    photoFile
+                )
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUrl)
                 startActivityForResult(intent, TAKE_PICTURE)
             }
         }
@@ -139,7 +144,7 @@ class dialogMakePoi : DialogFragment() {
                 val file = File(currentPath)
                 val url = Uri.fromFile(file)
                 previewImage.setImageURI(url)
-                imgPath=url
+                imgPath = url
                 Log.d("IMGURL PHOTO", url.toString())
             } catch (e: IOException) {
                 e.printStackTrace()
@@ -149,7 +154,7 @@ class dialogMakePoi : DialogFragment() {
         if (requestCode == SELECT_PICTURE && resultCode == Activity.RESULT_OK) {
             try {
                 val url = data!!.data
-                imgPath=url
+                imgPath = url
                 Log.d("IMGURL GALLERY", url.toString())
                 previewImage.setImageURI(url)
             } catch (e: IOException) {

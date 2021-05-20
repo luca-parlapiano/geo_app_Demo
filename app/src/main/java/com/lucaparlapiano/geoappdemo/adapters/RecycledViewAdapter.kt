@@ -11,11 +11,12 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.poi_list_single.view.*
 
 
-class RecycledViewAdapter(private val poiList:List<poiPoint>): RecyclerView.Adapter<myViewHolder>() {
+class RecycledViewAdapter(private val poiList: List<poiPoint>) :
+    RecyclerView.Adapter<myViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myViewHolder {
-        var inflater : LayoutInflater = LayoutInflater.from(parent.context)
-        val singleItem: View = inflater.inflate(R.layout.poi_list_single,parent,false)
+        var inflater: LayoutInflater = LayoutInflater.from(parent.context)
+        val singleItem: View = inflater.inflate(R.layout.poi_list_single, parent, false)
         return myViewHolder(singleItem)
     }
 
@@ -24,11 +25,11 @@ class RecycledViewAdapter(private val poiList:List<poiPoint>): RecyclerView.Adap
     }
 
     override fun getItemCount(): Int {
-       return poiList.size
+        return poiList.size
     }
 }
 
-class myViewHolder(val view:View):RecyclerView.ViewHolder(view) {
+class myViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(poiPoint: poiPoint) {
 
