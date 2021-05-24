@@ -1,5 +1,6 @@
 package com.lucaparlapiano.geoappdemo.fragments
 
+import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -68,13 +69,25 @@ class ShowPoiFragments : Fragment(), OnMapReadyCallback {
         }
     }
 
-    fun createBitmap(urlBitmap: Uri):Bitmap {
+    fun createBitmap(urlBitmap: Uri): Bitmap {
+
+        //Adding Permission for url after restart
+        try {
+            requireActivity().contentResolver.takePersistableUriPermission(
+                urlBitmap,
+                FLAG_GRANT_READ_URI_PERMISSION
+            )
+
+        } catch (e: SecurityException) {
+            Log.e("Errore assegnazione permessi", e.toString())
+        }
+
         var bitmapTemp: Bitmap = MediaStore.Images.Media.getBitmap(
             requireActivity().contentResolver,
             urlBitmap
         )
 
-        return Bitmap.createScaledBitmap(bitmapTemp,150,150,false)
+        return Bitmap.createScaledBitmap(bitmapTemp, 150, 150, false)
     }
 
     protected fun createMarker(

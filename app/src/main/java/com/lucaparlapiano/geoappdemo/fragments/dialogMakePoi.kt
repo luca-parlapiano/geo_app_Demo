@@ -2,6 +2,7 @@ package com.lucaparlapiano.geoappdemo.fragments
 
 import android.app.Activity
 import android.content.Intent
+import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -134,7 +135,8 @@ class dialogMakePoi : DialogFragment() {
     fun openGallery() {
         val intent = Intent()
         intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
+        intent.action = Intent.ACTION_OPEN_DOCUMENT
+        intent.setFlags(FLAG_GRANT_READ_URI_PERMISSION)
         startActivityForResult(Intent.createChooser(intent, "Select image"), SELECT_PICTURE)
     }
 
